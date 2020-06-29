@@ -19,6 +19,7 @@ import com.github.scribejava.apis.TwitterApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,9 +94,13 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             //get data from the intent (tweet)
-
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
             //update the recycler view with this tweet
-
+            //modify data source of the tweets
+            tweets.add(0, tweet);
+            //update the adapter
+            adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
