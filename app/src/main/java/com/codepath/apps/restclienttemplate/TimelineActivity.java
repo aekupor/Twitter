@@ -29,7 +29,7 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "onSuccess");
+                Log.i(TAG, "onSuccess" + json.toString());
             }
 
             @Override
