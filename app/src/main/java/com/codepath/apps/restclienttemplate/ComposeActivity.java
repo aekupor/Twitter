@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,6 +57,12 @@ public class ComposeActivity extends AppCompatActivity {
                         try {
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
                             Log.i(TAG, "published tweet says: " + tweet.body);
+                            Intent intent = new Intent();
+                            //set result code and bundle data for response
+                            intent.putExtra("tweet", tweet);
+                            //close the activity and pass data to parent
+                            setResult(RESULT_OK, intent);
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
