@@ -94,7 +94,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:background="@drawable/heartimage"
+        android:background="@drawable/heartImage"
         android:textSize="10sp" />
 
     <TextView
@@ -106,4 +106,14 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/btnLike"
         android:text="Like" />
+
+    <Button
+        android:id="@+id/btnRetweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvRetweetTitle"
+        android:layout_alignStart="@+id/tvRetweetTitle"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Retweet" />
 </RelativeLayout>
