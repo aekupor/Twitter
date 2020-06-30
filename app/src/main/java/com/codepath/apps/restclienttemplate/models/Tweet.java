@@ -20,6 +20,7 @@ public class Tweet {
     public String createdAt;
     public Integer favorites;
     public Integer retweets;
+    public Integer id;
     public User user;
 
     //empty constructor needed for Parceler Library
@@ -31,6 +32,7 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.favorites = jsonObject.getInt("favorite_count");
         tweet.retweets = jsonObject.getInt("retweet_count");
+        tweet.id = jsonObject.getInt("id_str");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         return tweet;
     }
