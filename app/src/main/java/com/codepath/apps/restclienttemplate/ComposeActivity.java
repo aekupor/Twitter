@@ -38,7 +38,7 @@ public class ComposeActivity extends AppCompatActivity {
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
 
-        String replyUsername;
+        final String replyUsername;
 
         Intent intent = getIntent();
         replyUsername = intent.getStringExtra("REPLY_USERNAME");
@@ -61,30 +61,55 @@ public class ComposeActivity extends AppCompatActivity {
                     Toast.makeText(ComposeActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //make an API call to Twitter to publish the tweet
-                client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        try {
-                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "published tweet says: " + tweet.body);
-                            Intent intent = new Intent();
-                            //set result code and bundle data for response
-                            intent.putExtra("tweet", Parcels.wrap(tweet));
-                            //close the activity and pass data to parent
-                            setResult(RESULT_OK, intent);
-                            finish();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if (replyUsername == null) {
+                    //make an API call to Twitter to publish the tweet
+                    client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, "published tweet says: " + tweet.body);
+                                Intent intent = new Intent();
+                                //set result code and bundle data for response
+                                intent.putExtra("tweet", Parcels.wrap(tweet));
+                                //close the activity and pass data to parent
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
 
-                    }
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFailure to publish tweet", throwable);
+                        }
+                    });
+                } else {
+                    //make an API call to Twitter to reply to tweet
+                    client.replyTweet(tweetContent, replyUsername, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, "replied published tweet says: " + tweet.body);
+                                Intent intent = new Intent();
+                                //set result code and bundle data for response
+                                intent.putExtra("tweet", Parcels.wrap(tweet));
+                                //close the activity and pass data to parent
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to publish tweet", throwable);
-                    }
-                });
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFailure to publish tweet", throwable);
+                        }
+                    });
+                }
             }
         });
     }
