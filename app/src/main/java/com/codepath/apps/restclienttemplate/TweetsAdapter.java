@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.apache.commons.cli.ParseException;
@@ -115,9 +116,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             Glide.with(context)
                     .load(tweet.user.profileImageUrl)
                     .into(ivProfileImage);
-            Glide.with(context)
-                    .load(tweet.imageUrl)
-                    .into(ivMedia);
+            if (tweet.imageUrl != "NULL") {
+                ivMedia.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(tweet.imageUrl)
+                        .apply(new RequestOptions().override(tweet.imageWidth, tweet.imageHeight))
+                        .into(ivMedia);
+            } else {
+                ivMedia.setVisibility(View.GONE);
+            }
         }
     }
 }
