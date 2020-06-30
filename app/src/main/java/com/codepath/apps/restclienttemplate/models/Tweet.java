@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate.models;
 
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +18,8 @@ public class Tweet {
 
     public String body;
     public String createdAt;
+    public Integer favorites;
+    public Integer retweets;
     public User user;
 
     //empty constructor needed for Parceler Library
@@ -26,6 +29,8 @@ public class Tweet {
         Tweet tweet = new Tweet();
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
+        tweet.favorites = jsonObject.getInt("favorite_count");
+        tweet.retweets = jsonObject.getInt("retweet_count");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         return tweet;
     }
