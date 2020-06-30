@@ -34,6 +34,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     Button btnDislike;
     Button btnRetweet;
     Button btnUnretweet;
+    Button btnReply;
     Tweet tweet;
     TwitterClient client;
 
@@ -52,6 +53,7 @@ public class TweetDetailActivity extends AppCompatActivity {
         btnDislike = findViewById(R.id.btnDislike);
         btnRetweet = findViewById(R.id.btnRetweet);
         btnUnretweet = findViewById(R.id.btnUnretweet);
+        btnReply = findViewById(R.id.btnReply);
 
         client = TwitterApp.getRestClient(this);
 
@@ -170,6 +172,14 @@ public class TweetDetailActivity extends AppCompatActivity {
                         Log.e(TAG, "onFailure to unretweet tweet", throwable);
                     }
                 });
+            }
+        });
+
+        btnReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userToReply = tweet.user.screenName;
+                Log.i(TAG, "reply to user: " + userToReply);
             }
         });
     }
