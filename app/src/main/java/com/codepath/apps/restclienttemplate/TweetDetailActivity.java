@@ -67,7 +67,7 @@ public class TweetDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TweetDetailActivity.this, "Like tweet", Toast.LENGTH_SHORT).show();
-                Integer tweetId = tweet.id;
+                String tweetId = tweet.id;
                 Log.i(TAG, "tweet to like: " + tweetId);
                 //make an API call to Twitter to publish the tweet
                 client.likeTweet(tweetId, new JsonHttpResponseHandler() {
