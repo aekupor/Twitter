@@ -16,12 +16,15 @@ import java.util.Locale;
 @Parcel
 public class Tweet {
 
+    public static final String TAG = "TweetModel";
+
     public String body;
     public String createdAt;
     public Integer favorites;
     public Integer retweets;
     public String id;
     public User user;
+    public String imageUrl;
 
     //empty constructor needed for Parceler Library
     public Tweet() {}
@@ -34,6 +37,15 @@ public class Tweet {
         tweet.retweets = jsonObject.getInt("retweet_count");
         tweet.id = jsonObject.getString("id_str");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        try {
+            JSONArray mediaArray = jsonObject.getJSONObject("entities").getJSONArray("media");
+            //get first element in mediaArray
+            //for all Tweets with more than one photo, will need to use extended_entities
+            tweet.imageUrl = mediaArray.getJSONObject(0).getString("media_url_https");
+            Log.i(TAG, "imageurl: " + tweet.imageUrl);
+        } catch (JSONException e) {
+            Log.i(TAG, "no media");
+        }
         return tweet;
     }
 
