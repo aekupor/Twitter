@@ -115,6 +115,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             Glide.with(context)
                     .load(tweet.user.profileImageUrl)
                     .into(ivProfileImage);
+            Glide.with(context)
+                    .load(tweet.imageUrl)
+                    .into(ivMedia);
         }
     }
 }
