@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.apache.commons.cli.ParseException;
+import org.parceler.Parcels;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -90,9 +92,17 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             // gets item position
             int position = getAdapterPosition();
             // make sure the position is valid, i.e. actually exists in the view
-            Log.i(TAG, "clicked at position: " + position);
-
             if (position != RecyclerView.NO_POSITION) {
+                // get the tweet at the position
+                Tweet tweet = tweets.get(position);
+                Log.i(TAG, "tweet clicked from user: " + tweet.user.screenName);
+
+                // create intent for the new activity
+                Intent intent = new Intent(context, TweetDetailActivity.class);
+                // serialize the movie using parceler, use its short name as a key
+                intent.putExtra("tweet", Parcels.wrap(tweet));
+                // show the activity
+                context.startActivity(intent);
             }
         }
 
