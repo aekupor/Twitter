@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvScreenName;
     TextView tvBody;
     TextView tvDate;
+    TextView tvFavorites;
+    TextView tvRetweets;
     ImageView ivProfileImage;
     Tweet tweet;
 
@@ -32,6 +35,8 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvBody = findViewById(R.id.tvBody);
         tvDate = findViewById(R.id.tvDate);
         ivProfileImage = findViewById(R.id.ivProfileImage);
+        tvFavorites = findViewById(R.id.tvFavorites);
+        tvRetweets = findViewById(R.id.tvRetweets);
 
         // unwrap the movie passed in via intent
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
@@ -40,6 +45,8 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvScreenName.setText(tweet.user.screenName);
         tvBody.setText(tweet.body);
         tvDate.setText(tweet.getRelativeTimeAgo(tweet.createdAt));
+        tvFavorites.setText(Integer.toString(tweet.favorites));
+        tvRetweets.setText(Integer.toString(tweet.retweets));
         Glide.with(this)
                 .load(tweet.user.profileImageUrl)
                 .into(ivProfileImage);
