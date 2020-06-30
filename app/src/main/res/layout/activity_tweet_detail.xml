@@ -85,4 +85,14 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/tvFavorites"
         android:text="Retweets:" />
+
+    <Button
+        android:id="@+id/btnLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFavoriteTitle"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:text="Like" />
 </RelativeLayout>

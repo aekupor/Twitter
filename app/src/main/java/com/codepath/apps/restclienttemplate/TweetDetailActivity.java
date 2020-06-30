@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvFavorites;
     TextView tvRetweets;
     ImageView ivProfileImage;
+    Button btnLike;
     Tweet tweet;
     TwitterClient client;
 
@@ -38,6 +40,7 @@ public class TweetDetailActivity extends AppCompatActivity {
         ivProfileImage = findViewById(R.id.ivProfileImage);
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
+        btnLike = findViewById(R.id.btnLike);
 
         client = TwitterApp.getRestClient(this);
 
