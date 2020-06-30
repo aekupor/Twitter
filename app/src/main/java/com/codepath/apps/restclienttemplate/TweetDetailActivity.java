@@ -39,7 +39,7 @@ public class TweetDetailActivity extends AppCompatActivity {
 
         tvScreenName.setText(tweet.user.screenName);
         tvBody.setText(tweet.body);
-        tvDate.setText(tweet.createdAt);
+        tvDate.setText(tweet.getRelativeTimeAgo(tweet.createdAt));
         Glide.with(this)
                 .load(tweet.user.profileImageUrl)
                 .into(ivProfileImage);
