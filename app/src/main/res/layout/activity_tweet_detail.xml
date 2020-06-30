@@ -51,9 +51,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvBody"
-        android:layout_alignStart="@+id/tvBody"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvFavoriteTitle"
         tools:text="15" />
 
     <TextView
@@ -61,8 +61,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvBody"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvRetweetTitle"
+        android:text="4" />
+
+    <TextView
+        android:id="@+id/tvFavoriteTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:text="Favorites:" />
+
+    <TextView
+        android:id="@+id/tvRetweetTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBody"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/tvFavorites"
-        android:text="4" />
+        android:text="Retweets:" />
 </RelativeLayout>
