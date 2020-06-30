@@ -120,5 +120,31 @@ public class TweetDetailActivity extends AppCompatActivity {
                 });
             }
         });
+
+        btnRetweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TweetDetailActivity.this, "Retweet", Toast.LENGTH_SHORT).show();
+                String tweetId = tweet.id;
+                Log.i(TAG, "tweet to retweet: " + tweetId);
+                //make an API call to Twitter to publish the tweet
+                client.retweet(tweetId, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        try {
+                            Tweet tweet = Tweet.fromJson(json.jsonObject);
+                            Log.i(TAG, "retweeted tweet: " + tweet.id);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.e(TAG, "onFailure to publish tweet", throwable);
+                    }
+                });
+            }
+        });
     }
 }
