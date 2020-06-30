@@ -39,10 +39,12 @@ public class ComposeActivity extends AppCompatActivity {
         btnTweet = findViewById(R.id.btnTweet);
 
         final String replyUsername;
+        final Long replyId;
 
         Intent intent = getIntent();
         replyUsername = intent.getStringExtra("REPLY_USERNAME");
-        Log.i(TAG, "in reply to user: " + replyUsername);
+        replyId = intent.getLongExtra("REPLY_ID", -1);
+        Log.i(TAG, "in reply to user: " + replyUsername + " id: " + replyId.toString());
 
         if (replyUsername != null) {
             etCompose.setText("@" + replyUsername);
@@ -87,7 +89,7 @@ public class ComposeActivity extends AppCompatActivity {
                     });
                 } else {
                     //make an API call to Twitter to reply to tweet
-                    client.replyTweet(tweetContent, replyUsername, new JsonHttpResponseHandler() {
+                    client.replyTweet(tweetContent, replyId, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Headers headers, JSON json) {
                             try {

@@ -23,6 +23,7 @@ public class Tweet {
     public Integer favorites;
     public Integer retweets;
     public String id;
+    public Long idInt;
     public User user;
     public String imageUrl;
     public Integer imageHeight;
@@ -38,6 +39,7 @@ public class Tweet {
         tweet.favorites = jsonObject.getInt("favorite_count");
         tweet.retweets = jsonObject.getInt("retweet_count");
         tweet.id = jsonObject.getString("id_str");
+        tweet.idInt = jsonObject.getLong("id");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         try {
             JSONArray mediaArray = jsonObject.getJSONObject("entities").getJSONArray("media");

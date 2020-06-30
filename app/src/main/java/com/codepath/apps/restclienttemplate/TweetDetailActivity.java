@@ -180,9 +180,11 @@ public class TweetDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String userToReply = tweet.user.screenName;
+                Long replyTweetId = tweet.idInt;
                 Log.i(TAG, "reply to user: " + userToReply);
                 Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
                 intent.putExtra("REPLY_USERNAME", userToReply);
+                intent.putExtra("REPLY_ID", replyTweetId);
                 startActivityForResult(intent, TWEET_CODE);
             }
         });
