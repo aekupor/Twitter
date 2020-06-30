@@ -23,6 +23,7 @@ import okhttp3.Headers;
 public class TweetDetailActivity extends AppCompatActivity {
 
     public static final String TAG = "TweetDetailActivity";
+    public final int TWEET_CODE = 10;
 
     TextView tvScreenName;
     TextView tvBody;
@@ -180,6 +181,8 @@ public class TweetDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userToReply = tweet.user.screenName;
                 Log.i(TAG, "reply to user: " + userToReply);
+                Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
+                startActivityForResult(intent, TWEET_CODE);
             }
         });
     }
