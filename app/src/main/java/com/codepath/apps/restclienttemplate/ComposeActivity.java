@@ -38,6 +38,16 @@ public class ComposeActivity extends AppCompatActivity {
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
 
+        String replyUsername;
+
+        Intent intent = getIntent();
+        try {
+            replyUsername = intent.getStringExtra("REPLY_USERNAME");
+        } catch (Exception e) {
+            replyUsername = "NULL";
+        }
+
+
         //set click listener on button
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override

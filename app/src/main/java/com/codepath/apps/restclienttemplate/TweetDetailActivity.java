@@ -182,6 +182,7 @@ public class TweetDetailActivity extends AppCompatActivity {
                 String userToReply = tweet.user.screenName;
                 Log.i(TAG, "reply to user: " + userToReply);
                 Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
+                intent.putExtra("REPLY_USERNAME", userToReply);
                 startActivityForResult(intent, TWEET_CODE);
             }
         });
