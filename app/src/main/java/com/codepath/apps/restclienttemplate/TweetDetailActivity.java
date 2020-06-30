@@ -146,5 +146,31 @@ public class TweetDetailActivity extends AppCompatActivity {
                 });
             }
         });
+
+        btnUnretweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TweetDetailActivity.this, "Unretweet", Toast.LENGTH_SHORT).show();
+                String tweetId = tweet.id;
+                Log.i(TAG, "tweet to unretweet: " + tweetId);
+                //make an API call to Twitter to publish the tweet
+                client.unretweet(tweetId, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        try {
+                            Tweet tweet = Tweet.fromJson(json.jsonObject);
+                            Log.i(TAG, "unretweeted tweet: " + tweet.id);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.e(TAG, "onFailure to unretweet tweet", throwable);
+                    }
+                });
+            }
+        });
     }
 }
