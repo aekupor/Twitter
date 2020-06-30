@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -31,6 +32,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvFavorites;
     TextView tvRetweets;
     ImageView ivProfileImage;
+    ImageView ivMedia;
     Button btnLike;
     Button btnDislike;
     Button btnRetweet;
@@ -48,6 +50,7 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvBody = findViewById(R.id.tvBody);
         tvDate = findViewById(R.id.tvDate);
         ivProfileImage = findViewById(R.id.ivProfileImage);
+        ivMedia = findViewById(R.id.ivMedia);
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
         btnLike = findViewById(R.id.btnLike);
@@ -70,8 +73,15 @@ public class TweetDetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(tweet.user.profileImageUrl)
                 .into(ivProfileImage);
+        if (tweet.imageUrl != null) {
+            Log.i(TAG, "image: " + tweet.imageUrl);
+            ivMedia.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(tweet.imageUrl)
+                    .apply(new RequestOptions().override(tweet.imageWidth, tweet.imageHeight))
+                    .into(ivMedia);
+        }
 
-        //set click listener on button
         btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

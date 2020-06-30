@@ -55,7 +55,7 @@ public class Tweet {
             Log.i(TAG, "height: " + tweet.imageHeight.toString() + " width: "+ tweet.imageWidth.toString());
         } catch (JSONException e) {
             Log.i(TAG, "no media");
-            tweet.imageUrl = "NULL";
+            tweet.imageUrl = null;
         }
         return tweet;
     }
