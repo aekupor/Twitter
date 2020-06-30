@@ -31,6 +31,9 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvRetweets;
     ImageView ivProfileImage;
     Button btnLike;
+    Button btnDislike;
+    Button btnRetweet;
+    Button btnUnretweet;
     Tweet tweet;
     TwitterClient client;
 
@@ -46,6 +49,9 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
         btnLike = findViewById(R.id.btnLike);
+        btnDislike = findViewById(R.id.btnDislike);
+        btnRetweet = findViewById(R.id.btnRetweet);
+        btnUnretweet = findViewById(R.id.btnUnretweet);
 
         client = TwitterApp.getRestClient(this);
 

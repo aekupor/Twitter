@@ -116,4 +116,24 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:text="Retweet" />
+
+    <Button
+        android:id="@+id/btnUnretweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRetweet"
+        android:layout_alignStart="@+id/tvRetweetTitle"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="UnRetweet" />
+
+    <Button
+        android:id="@+id/btnDislike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLike"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:text="Dislike" />
 </RelativeLayout>
