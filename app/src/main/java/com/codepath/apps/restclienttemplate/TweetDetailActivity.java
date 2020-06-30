@@ -36,5 +36,12 @@ public class TweetDetailActivity extends AppCompatActivity {
         // unwrap the movie passed in via intent
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
         Log.d(TAG, String.format("Showing details for '%s'", tweet.body));
+
+        tvScreenName.setText(tweet.user.screenName);
+        tvBody.setText(tweet.body);
+        tvDate.setText(tweet.createdAt);
+        Glide.with(this)
+                .load(tweet.user.profileImageUrl)
+                .into(ivProfileImage);
     }
 }
