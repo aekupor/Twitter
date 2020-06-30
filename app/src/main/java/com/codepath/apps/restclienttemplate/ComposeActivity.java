@@ -41,12 +41,12 @@ public class ComposeActivity extends AppCompatActivity {
         String replyUsername;
 
         Intent intent = getIntent();
-        try {
-            replyUsername = intent.getStringExtra("REPLY_USERNAME");
-        } catch (Exception e) {
-            replyUsername = "NULL";
-        }
+        replyUsername = intent.getStringExtra("REPLY_USERNAME");
+        Log.i(TAG, "in reply to user: " + replyUsername);
 
+        if (replyUsername != null) {
+            etCompose.setText("@" + replyUsername);
+        }
 
         //set click listener on button
         btnTweet.setOnClickListener(new View.OnClickListener() {
