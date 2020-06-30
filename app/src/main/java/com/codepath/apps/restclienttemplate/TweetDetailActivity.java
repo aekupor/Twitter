@@ -25,6 +25,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvRetweets;
     ImageView ivProfileImage;
     Tweet tweet;
+    TwitterClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class TweetDetailActivity extends AppCompatActivity {
         ivProfileImage = findViewById(R.id.ivProfileImage);
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
+
+        client = TwitterApp.getRestClient(this);
 
         // unwrap the movie passed in via intent
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
