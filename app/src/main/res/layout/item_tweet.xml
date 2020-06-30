@@ -48,10 +48,10 @@
 
     <ImageView
         android:id="@+id/ivMedia"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvBody"
+        android:layout_centerInParent="true"
         android:layout_marginTop="5dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic"
-        android:layout_centerInParent="true"/>
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </RelativeLayout>

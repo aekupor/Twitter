@@ -25,6 +25,8 @@ public class Tweet {
     public String id;
     public User user;
     public String imageUrl;
+    public String imageHeight;
+    public String imageWidth;
 
     //empty constructor needed for Parceler Library
     public Tweet() {}
@@ -43,6 +45,12 @@ public class Tweet {
             //for all Tweets with more than one photo, will need to use extended_entities
             tweet.imageUrl = mediaArray.getJSONObject(0).getString("media_url_https");
             Log.i(TAG, "imageurl: " + tweet.imageUrl);
+
+            //get size of image
+            JSONObject sizes = mediaArray.getJSONObject(0).getJSONObject("sizes");
+            tweet.imageHeight = sizes.getJSONObject("medium").getString("h");
+            tweet.imageWidth = sizes.getJSONObject("medium").getString("w");
+            Log.i(TAG, "height: " + tweet.imageHeight + " width: "+ tweet.imageWidth);
         } catch (JSONException e) {
             Log.i(TAG, "no media");
         }
