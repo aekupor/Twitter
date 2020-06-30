@@ -89,7 +89,7 @@ public class TweetDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to publish tweet", throwable);
+                        Log.e(TAG, "onFailure to like tweet", throwable);
                     }
                 });
             }
@@ -115,7 +115,7 @@ public class TweetDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to publish tweet", throwable);
+                        Log.e(TAG, "onFailure to dislike tweet", throwable);
                     }
                 });
             }
@@ -141,7 +141,7 @@ public class TweetDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to publish tweet", throwable);
+                        Log.e(TAG, "onFailure to retweet tweet", throwable);
                     }
                 });
             }
