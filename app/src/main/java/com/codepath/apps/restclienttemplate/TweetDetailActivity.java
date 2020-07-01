@@ -197,10 +197,6 @@ public class TweetDetailActivity extends AppCompatActivity implements EditNameDi
                 userToReply = tweet.user.screenName;
                 replyTweetId = tweet.idInt;
                 Log.i(TAG, "reply to user: " + userToReply);
-                //Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
-                //intent.putExtra("REPLY_USERNAME", userToReply);
-                //intent.putExtra("REPLY_ID", replyTweetId);
-                //startActivityForResult(intent, TWEET_CODE);
                 showEditDialog();
             }
         });
