@@ -125,16 +125,22 @@ public class ComposeActivity extends AppCompatActivity implements EditNameDialog
         editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
+    private void showEditDialog(String content) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(content);
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
     // This method is invoked in the activity when the listener is triggered
     // Access the data result passed to the activity here
     public void onFinishEditDialog(String tweetContent) {
         if (tweetContent.isEmpty()) {
             Toast.makeText(ComposeActivity.this, "Sorry, your tweet cannot be empty", Toast.LENGTH_SHORT).show();
-            return;
+            showEditDialog();
         }
         if (tweetContent.length() > MAX_TWEET_LENGTH) {
             Toast.makeText(ComposeActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_SHORT).show();
-            return;
+            showEditDialog(tweetContent);
         }
         if (replyUsername == null) {
             //make an API call to Twitter to publish the tweet

@@ -65,7 +65,9 @@ public class EditNameDialogFragment extends DialogFragment {
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "");
         getDialog().setTitle(title);
-        if (title != "") {
+        if (title.length() >= 280) {
+            etCompose.setText(title);
+        } else if (title != "") {
             etCompose.setText("@" + title);
         }
 
