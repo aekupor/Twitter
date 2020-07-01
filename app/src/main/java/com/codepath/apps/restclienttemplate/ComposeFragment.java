@@ -1,46 +1,31 @@
 package com.codepath.apps.restclienttemplate;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.codepath.apps.restclienttemplate.models.Tweet;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-
-import org.json.JSONException;
-import org.parceler.Parcels;
-
-import okhttp3.Headers;
-
-public class EditNameDialogFragment extends DialogFragment {
+public class ComposeFragment extends DialogFragment {
 
     public static final int MAX_TWEET_LENGTH = 280;
 
     EditText etCompose;
     Button btnTweet;
 
-    public EditNameDialogFragment() {
+    public ComposeFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
     }
 
 
-    public static EditNameDialogFragment newInstance(String title) {
-        EditNameDialogFragment frag = new EditNameDialogFragment();
+    public static ComposeFragment newInstance(String title) {
+        ComposeFragment frag = new ComposeFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
         frag.setArguments(args);
@@ -54,7 +39,7 @@ public class EditNameDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_name, container);
+        return inflater.inflate(R.layout.fragment_compose, container);
     }
 
     @Override

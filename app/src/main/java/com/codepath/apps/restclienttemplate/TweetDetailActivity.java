@@ -22,7 +22,7 @@ import org.parceler.Parcels;
 
 import okhttp3.Headers;
 
-public class TweetDetailActivity extends AppCompatActivity implements EditNameDialogFragment.EditNameDialogListener {
+public class TweetDetailActivity extends AppCompatActivity implements ComposeFragment.EditNameDialogListener {
 
     public static final String TAG = "TweetDetailActivity";
     public static final int MAX_TWEET_LENGTH = 280;
@@ -204,14 +204,14 @@ public class TweetDetailActivity extends AppCompatActivity implements EditNameDi
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(userToReply);
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        ComposeFragment composeFragment = ComposeFragment.newInstance(userToReply);
+        composeFragment.show(fm, "fragment_edit_name");
     }
 
     private void showEditDialog(String content) {
         FragmentManager fm = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(content);
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        ComposeFragment composeFragment = ComposeFragment.newInstance(content);
+        composeFragment.show(fm, "fragment_edit_name");
     }
 
 

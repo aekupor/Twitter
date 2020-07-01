@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.github.scribejava.apis.TwitterApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +26,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class TimelineActivity extends AppCompatActivity implements EditNameDialogFragment.EditNameDialogListener {
+public class TimelineActivity extends AppCompatActivity implements ComposeFragment.EditNameDialogListener {
 
     public static final String TAG = "TimelineActivity";
     public static final int MAX_TWEET_LENGTH = 280;
@@ -131,14 +130,14 @@ public class TimelineActivity extends AppCompatActivity implements EditNameDialo
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("");
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        ComposeFragment composeFragment = ComposeFragment.newInstance("");
+        composeFragment.show(fm, "fragment_edit_name");
     }
 
     private void showEditDialog(String content) {
         FragmentManager fm = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(content);
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        ComposeFragment composeFragment = ComposeFragment.newInstance(content);
+        composeFragment.show(fm, "fragment_edit_name");
     }
 
     // This method is invoked in the activity when the listener is triggered
