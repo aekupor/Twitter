@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,18 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
+import org.json.JSONException;
+import org.parceler.Parcels;
+
+import okhttp3.Headers;
 
 public class EditNameDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
 
@@ -24,6 +35,7 @@ public class EditNameDialogFragment extends DialogFragment implements TextView.O
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
     }
+
 
     public static EditNameDialogFragment newInstance(String title) {
         EditNameDialogFragment frag = new EditNameDialogFragment();
@@ -49,14 +61,25 @@ public class EditNameDialogFragment extends DialogFragment implements TextView.O
         // Get field from view
         etCompose = view.findViewById(R.id.etCompose);
         btnTweet = view.findViewById(R.id.btnTweet);
+
         // Fetch arguments from bundle and set title
-        String title = getArguments().getString("title", "Enter Name");
+        String title = getArguments().getString("title", "");
         getDialog().setTitle(title);
+        if (title != "") {
+            etCompose.setText("@" + title);
+        }
         // Show soft keyboard automatically and request focus to field
         etCompose.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         etCompose.setOnEditorActionListener(this);
+
+        btnTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     // Fires whenever the textfield has an action performed

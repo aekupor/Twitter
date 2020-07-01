@@ -27,6 +27,9 @@ public class ComposeActivity extends AppCompatActivity implements EditNameDialog
     EditText etCompose;
     Button btnTweet;
 
+    String replyUsername;
+    Long replyId;
+
     TwitterClient client;
 
     @Override
@@ -38,9 +41,6 @@ public class ComposeActivity extends AppCompatActivity implements EditNameDialog
 
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
-
-        final String replyUsername;
-        final Long replyId;
 
         Intent intent = getIntent();
         replyUsername = intent.getStringExtra("REPLY_USERNAME");
@@ -121,7 +121,7 @@ public class ComposeActivity extends AppCompatActivity implements EditNameDialog
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(replyUsername);
         editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
