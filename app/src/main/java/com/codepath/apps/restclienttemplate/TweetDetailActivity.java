@@ -43,6 +43,9 @@ public class TweetDetailActivity extends AppCompatActivity implements EditNameDi
     Tweet tweet;
     TwitterClient client;
 
+    String userToReply;
+    Long replyTweetId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -191,8 +194,8 @@ public class TweetDetailActivity extends AppCompatActivity implements EditNameDi
         btnReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userToReply = tweet.user.screenName;
-                Long replyTweetId = tweet.idInt;
+                userToReply = tweet.user.screenName;
+                replyTweetId = tweet.idInt;
                 Log.i(TAG, "reply to user: " + userToReply);
                 //Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
                 //intent.putExtra("REPLY_USERNAME", userToReply);
@@ -205,7 +208,7 @@ public class TweetDetailActivity extends AppCompatActivity implements EditNameDi
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("");
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(userToReply);
         editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
@@ -228,7 +231,28 @@ public class TweetDetailActivity extends AppCompatActivity implements EditNameDi
             showEditDialog(tweetContent);
         }
 
-        //make an API call to Twitter to publish the tweet
-        
+        //make an API call to Twitter to reply to tweet
+        client.replyTweet(tweetContent, replyTweetId, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                try {
+                    Tweet tweet = Tweet.fromJson(json.jsonObject);
+                    Log.i(TAG, "replied published tweet says: " + tweet.body);
+                    Intent intent = new Intent();
+                    //set result code and bundle data for response
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    //close the activity and pass data to parent
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "onFailure to publish tweet", throwable);
+            }
+        });
     }
 }
