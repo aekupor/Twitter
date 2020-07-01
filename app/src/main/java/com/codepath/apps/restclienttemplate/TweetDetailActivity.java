@@ -33,6 +33,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
     TextView tvDate;
     TextView tvFavorites;
     TextView tvRetweets;
+    TextView tvFollwersNum;
+    TextView tvFollowingNum;
     ImageView ivProfileImage;
     ImageView ivMedia;
     Button btnLike;
@@ -58,6 +60,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         ivMedia = findViewById(R.id.ivMedia);
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
+        tvFollwersNum = findViewById(R.id.tvFollowersNum);
+        tvFollowingNum = findViewById(R.id.tvFollowingNum);
         btnLike = findViewById(R.id.btnLike);
         btnDislike = findViewById(R.id.btnDislike);
         btnRetweet = findViewById(R.id.btnRetweet);
@@ -73,6 +77,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         tvScreenName.setText(tweet.user.screenName);
         tvBody.setText(tweet.body);
         tvDate.setText(tweet.getRelativeTimeAgo(tweet.createdAt));
+        tvFollwersNum.setText(Integer.toString(tweet.user.followersCount));
+        tvFollowingNum.setText(Integer.toString(tweet.user.follwingCount));
         tvFavorites.setText(Integer.toString(tweet.favorites));
         tvRetweets.setText(Integer.toString(tweet.retweets));
         Glide.with(this)

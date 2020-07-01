@@ -12,7 +12,7 @@ public class User {
     public String profileImageUrl;
     public long idInt;
     public Integer followersCount;
-    public Integer friendsCount;
+    public Integer follwingCount;
 
     //empty constructor needed for Parceler Library
     public User(){}
@@ -24,7 +24,7 @@ public class User {
         user.profileImageUrl = jsonObject.getString("profile_image_url_https");
         user.idInt = jsonObject.getLong("id");
         user.followersCount = jsonObject.getInt("followers_count");
-        user.friendsCount = jsonObject.getInt("friends_count");
+        user.follwingCount = jsonObject.getInt("friends_count");
         return user;
     }
 }
