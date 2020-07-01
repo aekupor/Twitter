@@ -127,7 +127,63 @@ public class ComposeActivity extends AppCompatActivity implements EditNameDialog
 
     // This method is invoked in the activity when the listener is triggered
     // Access the data result passed to the activity here
-    public void onFinishEditDialog(String inputText) {
-        Toast.makeText(this, "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+    public void onFinishEditDialog(String tweetContent) {
+        if (tweetContent.isEmpty()) {
+            Toast.makeText(ComposeActivity.this, "Sorry, your tweet cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (tweetContent.length() > MAX_TWEET_LENGTH) {
+            Toast.makeText(ComposeActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (replyUsername == null) {
+            //make an API call to Twitter to publish the tweet
+            client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Headers headers, JSON json) {
+                    try {
+                        Tweet tweet = Tweet.fromJson(json.jsonObject);
+                        Log.i(TAG, "published tweet says: " + tweet.body);
+                        Intent intent = new Intent();
+                        //set result code and bundle data for response
+                        intent.putExtra("tweet", Parcels.wrap(tweet));
+                        //close the activity and pass data to parent
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                    Log.e(TAG, "onFailure to publish tweet", throwable);
+                }
+            });
+        } else {
+            //make an API call to Twitter to reply to tweet
+            client.replyTweet(tweetContent, replyId, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Headers headers, JSON json) {
+                    try {
+                        Tweet tweet = Tweet.fromJson(json.jsonObject);
+                        Log.i(TAG, "replied published tweet says: " + tweet.body);
+                        Intent intent = new Intent();
+                        //set result code and bundle data for response
+                        intent.putExtra("tweet", Parcels.wrap(tweet));
+                        //close the activity and pass data to parent
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                    Log.e(TAG, "onFailure to publish tweet", throwable);
+                }
+            });
+        }
     }
 }
