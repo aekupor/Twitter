@@ -109,8 +109,20 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             }
         }
 
-        public void bind(Tweet tweet) {
+        public void bind(final Tweet tweet) {
             tvBody.setText(tweet.body);
+            tvBody.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // create intent for the new activity
+                    Intent intent = new Intent(context, TweetDetailActivity.class);
+                    // serialize the movie using parceler
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    // show the activity
+                    context.startActivity(intent);
+                }
+            });
+
             tvScreenName.setText(tweet.user.screenName);
             tvDate.setText(tweet.getRelativeTimeAgo(tweet.createdAt));
             Glide.with(context)
