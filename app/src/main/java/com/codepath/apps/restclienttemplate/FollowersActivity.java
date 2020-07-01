@@ -26,6 +26,6 @@ public class FollowersActivity extends AppCompatActivity {
         rvUsers = findViewById(R.id.rvTweets);
         //init the list of users and adapter
         users = new ArrayList<>();
-        adapter = new TweetsAdapter(this, users);
+        adapter = new UsersAdapter(this, users);
     }
 }
