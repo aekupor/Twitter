@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +21,15 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import org.json.JSONException;
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+
 import okhttp3.Headers;
 
 public class TweetDetailActivity extends AppCompatActivity implements ComposeFragment.EditNameDialogListener {
 
     public static final String TAG = "TweetDetailActivity";
     public static final int MAX_TWEET_LENGTH = 280;
-    public final int TWEET_CODE = 10;
+    public static final int FOLLOWER_CODE = 10;
 
     TextView tvScreenName;
     TextView tvBody;
@@ -219,6 +222,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
                         Log.i(TAG, "onSuccess call to getFollowersList");
+                        Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
+                        startActivity(i);
                     }
 
                     @Override
@@ -237,6 +242,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
                         Log.i(TAG, "onSuccess call to getFollowingList");
+                        Intent intent = new Intent(TweetDetailActivity.this, FollowersActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override
