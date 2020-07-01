@@ -85,10 +85,6 @@ public class TimelineActivity extends AppCompatActivity implements EditNameDialo
         if (item.getItemId() == R.id.compose) {
             //compose icon has been selected
             //navigate to the compose activity
-
-            //Intent intent = new Intent(this, ComposeActivity.class);
-            //startActivityForResult(intent, REQUEST_CODE);
-
             showEditDialog();
             return true;
         }

@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,9 +22,10 @@ import org.parceler.Parcels;
 
 import okhttp3.Headers;
 
-public class TweetDetailActivity extends AppCompatActivity {
+public class TweetDetailActivity extends AppCompatActivity implements EditNameDialogFragment.EditNameDialogListener {
 
     public static final String TAG = "TweetDetailActivity";
+    public static final int MAX_TWEET_LENGTH = 280;
     public final int TWEET_CODE = 10;
 
     TextView tvScreenName;
@@ -192,11 +194,41 @@ public class TweetDetailActivity extends AppCompatActivity {
                 String userToReply = tweet.user.screenName;
                 Long replyTweetId = tweet.idInt;
                 Log.i(TAG, "reply to user: " + userToReply);
-                Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
-                intent.putExtra("REPLY_USERNAME", userToReply);
-                intent.putExtra("REPLY_ID", replyTweetId);
-                startActivityForResult(intent, TWEET_CODE);
+                //Intent intent = new Intent(TweetDetailActivity.this, ComposeActivity.class);
+                //intent.putExtra("REPLY_USERNAME", userToReply);
+                //intent.putExtra("REPLY_ID", replyTweetId);
+                //startActivityForResult(intent, TWEET_CODE);
+                showEditDialog();
             }
         });
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("");
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
+    private void showEditDialog(String content) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(content);
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
+
+    // This method is invoked in the activity when the listener is triggered
+    // Access the data result passed to the activity here
+    public void onFinishEditDialog(String tweetContent) {
+        if (tweetContent.isEmpty()) {
+            Toast.makeText(TweetDetailActivity.this, "Sorry, your tweet cannot be empty", Toast.LENGTH_SHORT).show();
+            showEditDialog();
+        }
+        if (tweetContent.length() > MAX_TWEET_LENGTH) {
+            Toast.makeText(TweetDetailActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_SHORT).show();
+            showEditDialog(tweetContent);
+        }
+
+        //make an API call to Twitter to publish the tweet
+        
     }
 }
