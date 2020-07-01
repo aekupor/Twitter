@@ -40,19 +40,25 @@ public class FollowersActivity extends AppCompatActivity {
         adapter = new UsersAdapter(this, users);
 
         Long userId = getIntent().getExtras().getLong("USER_ID");
-        Log.i(TAG, "user id to display: " + userId);
+        Boolean followers = getIntent().getExtras().getBoolean("FOLLOWERS");
+        Log.i(TAG, "user id to display: " + userId.toString() + " followers: " + followers.toString());
 
-        client.getFollowersList(userId, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "onSuccess call to getFollowersList");
-                
-            }
+        if (followers) {
+            //make call to getFollowersList
+            client.getFollowersList(userId, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Headers headers, JSON json) {
+                    Log.i(TAG, "onSuccess call to getFollowersList");
+                    
+                }
 
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.i(TAG, "onFailure call to getFollowersList");
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                    Log.i(TAG, "onFailure call to getFollowersList");
+                }
+            });
+        } else {
+            //make call to getFollowingList
+        }
     }
 }
