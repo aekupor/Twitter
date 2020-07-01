@@ -218,12 +218,14 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "followers button clicked");
+                Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
+                i.putExtra("USER_ID", tweet.user.idInt);
+                startActivity(i);
                 client.getFollowersList(tweet.user.idInt, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
                         Log.i(TAG, "onSuccess call to getFollowersList");
-                        Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
-                        startActivity(i);
+
                     }
 
                     @Override

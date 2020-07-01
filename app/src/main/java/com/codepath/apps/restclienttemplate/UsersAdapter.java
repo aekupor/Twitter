@@ -81,7 +81,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                 // create intent for the new activity
                 Intent intent = new Intent(context, FollowersActivity.class);
                 // serialize the user using parceler
-                intent.putExtra("USER", Parcels.wrap(user));
+                intent.putExtra("USER_ID", user.idInt);
                 // show the activity
                 context.startActivity(intent);
             }
