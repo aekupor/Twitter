@@ -27,6 +27,8 @@ import okhttp3.Headers;
 
 public class EditNameDialogFragment extends DialogFragment {
 
+    public static final int MAX_TWEET_LENGTH = 280;
+
     EditText etCompose;
     Button btnTweet;
 
@@ -65,7 +67,7 @@ public class EditNameDialogFragment extends DialogFragment {
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "");
         getDialog().setTitle(title);
-        if (title.length() >= 280) {
+        if (title.length() >= MAX_TWEET_LENGTH) {
             etCompose.setText(title);
         } else if (title != "") {
             etCompose.setText("@" + title);

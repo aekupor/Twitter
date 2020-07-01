@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -26,9 +27,10 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements EditNameDialogFragment.EditNameDialogListener {
 
     public static final String TAG = "TimelineActivity";
+    public static final int MAX_TWEET_LENGTH = 280;
     public final int REQUEST_CODE = 20;
 
     TwitterClient client;
@@ -83,8 +85,11 @@ public class TimelineActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.compose) {
             //compose icon has been selected
             //navigate to the compose activity
-            Intent intent = new Intent(this, ComposeActivity.class);
-            startActivityForResult(intent, REQUEST_CODE);
+
+            //Intent intent = new Intent(this, ComposeActivity.class);
+            //startActivityForResult(intent, REQUEST_CODE);
+
+            showEditDialog();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -124,6 +129,55 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.i(TAG, "onFailure", throwable);
+            }
+        });
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("");
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
+    private void showEditDialog(String content) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(content);
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
+    // This method is invoked in the activity when the listener is triggered
+    // Access the data result passed to the activity here
+    public void onFinishEditDialog(String tweetContent) {
+        if (tweetContent.isEmpty()) {
+            Toast.makeText(TimelineActivity.this, "Sorry, your tweet cannot be empty", Toast.LENGTH_SHORT).show();
+            showEditDialog();
+        }
+        if (tweetContent.length() > MAX_TWEET_LENGTH) {
+            Toast.makeText(TimelineActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_SHORT).show();
+            showEditDialog(tweetContent);
+        }
+
+        //make an API call to Twitter to publish the tweet
+        client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                try {
+                    Tweet tweet = Tweet.fromJson(json.jsonObject);
+                    Log.i(TAG, "published tweet says: " + tweet.body);
+                    Intent intent = new Intent();
+                    //set result code and bundle data for response
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    //close the activity and pass data to parent
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "onFailure to publish tweet", throwable);
             }
         });
     }
