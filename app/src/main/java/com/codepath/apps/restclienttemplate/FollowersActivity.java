@@ -74,6 +74,25 @@ public class FollowersActivity extends AppCompatActivity {
             });
         } else {
             //make call to getFollowingList
+            client.getFollowingList(userId, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Headers headers, JSON json) {
+                    Log.i(TAG, "onSuccess call to getFollowingList");
+                    JSONObject jsonObject = json.jsonObject;
+                    try {
+                        JSONArray jsonArray = jsonObject.getJSONArray("users");
+                        adapter.addAll(User.fromJsonArray(jsonArray));
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                    Log.i(TAG, "onFailure call to getFollowingList");
+                }
+            });
         }
     }
 }
