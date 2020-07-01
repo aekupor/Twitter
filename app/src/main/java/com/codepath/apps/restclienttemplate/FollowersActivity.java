@@ -8,11 +8,14 @@ import android.util.Log;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Headers;
 
 public class FollowersActivity extends AppCompatActivity {
 
@@ -21,11 +24,14 @@ public class FollowersActivity extends AppCompatActivity {
     RecyclerView rvUsers;
     List<User> users;
     UsersAdapter adapter;
+    TwitterClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
+
+        client = TwitterApp.getRestClient(this);
 
         //find the recycler view
         rvUsers = findViewById(R.id.rvTweets);
@@ -35,5 +41,18 @@ public class FollowersActivity extends AppCompatActivity {
 
         Long userId = getIntent().getExtras().getLong("USER_ID");
         Log.i(TAG, "user id to display: " + userId);
+
+        client.getFollowersList(userId, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i(TAG, "onSuccess call to getFollowersList");
+                
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.i(TAG, "onFailure call to getFollowersList");
+            }
+        });
     }
 }
