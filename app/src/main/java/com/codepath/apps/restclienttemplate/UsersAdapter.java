@@ -57,6 +57,18 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         return users.size();
     }
 
+    //clean all elements of the recycler
+    public void clear() {
+        users.clear();
+        notifyDataSetChanged();
+    }
+
+    //add a list of items
+    public void addAll(List<User> userList) {
+        users.addAll(userList);
+        notifyDataSetChanged();
+    }
+
     //define a viewholder
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -78,12 +90,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                 User user = users.get(position);
                 Log.i(TAG, "user clicked: " + user.screenName);
 
-                // create intent for the new activity
-                Intent intent = new Intent(context, FollowersActivity.class);
-                // serialize the user using parceler
-                intent.putExtra("USER_ID", user.idInt);
-                // show the activity
-                context.startActivity(intent);
+                // create intent for the new activity - if want to be clickable
             }
         }
 
