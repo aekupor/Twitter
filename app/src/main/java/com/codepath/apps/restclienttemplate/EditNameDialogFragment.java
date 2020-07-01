@@ -25,7 +25,7 @@ import org.parceler.Parcels;
 
 import okhttp3.Headers;
 
-public class EditNameDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
+public class EditNameDialogFragment extends DialogFragment {
 
     EditText etCompose;
     Button btnTweet;
@@ -68,33 +68,16 @@ public class EditNameDialogFragment extends DialogFragment implements TextView.O
         if (title != "") {
             etCompose.setText("@" + title);
         }
-        // Show soft keyboard automatically and request focus to field
-        etCompose.requestFocus();
-        getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        etCompose.setOnEditorActionListener(this);
 
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Return input text back to activity through the implemented listener
+                EditNameDialogListener listener = (EditNameDialogListener) getActivity();
+                listener.onFinishEditDialog(etCompose.getText().toString());
+                // Close the dialog and return back to the parent activity
+                dismiss();
             }
         });
-    }
-
-    // Fires whenever the textfield has an action performed
-    // In this case, when the "Done" button is pressed
-    // REQUIRES a 'soft keyboard' (virtual keyboard)
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (EditorInfo.IME_ACTION_DONE == actionId) {
-            // Return input text back to activity through the implemented listener
-            EditNameDialogListener listener = (EditNameDialogListener) getActivity();
-            listener.onFinishEditDialog(etCompose.getText().toString());
-            // Close the dialog and return back to the parent activity
-            dismiss();
-            return true;
-        }
-        return false;
     }
 }
