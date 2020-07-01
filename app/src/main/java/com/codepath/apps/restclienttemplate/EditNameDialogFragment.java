@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,7 +16,8 @@ import androidx.fragment.app.DialogFragment;
 
 public class EditNameDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
 
-    private EditText mEditText;
+    EditText etCompose;
+    Button btnTweet;
 
     public EditNameDialogFragment() {
         // Empty constructor is required for DialogFragment
@@ -45,15 +47,16 @@ public class EditNameDialogFragment extends DialogFragment implements TextView.O
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
+        etCompose = view.findViewById(R.id.etCompose);
+        btnTweet = view.findViewById(R.id.btnTweet);
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");
         getDialog().setTitle(title);
         // Show soft keyboard automatically and request focus to field
-        mEditText.requestFocus();
+        etCompose.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        mEditText.setOnEditorActionListener(this);
+        etCompose.setOnEditorActionListener(this);
     }
 
     // Fires whenever the textfield has an action performed
@@ -64,7 +67,7 @@ public class EditNameDialogFragment extends DialogFragment implements TextView.O
         if (EditorInfo.IME_ACTION_DONE == actionId) {
             // Return input text back to activity through the implemented listener
             EditNameDialogListener listener = (EditNameDialogListener) getActivity();
-            listener.onFinishEditDialog(mEditText.getText().toString());
+            listener.onFinishEditDialog(etCompose.getText().toString());
             // Close the dialog and return back to the parent activity
             dismiss();
             return true;
