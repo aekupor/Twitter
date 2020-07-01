@@ -1,16 +1,19 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class EditNameDialogFragment extends DialogFragment {
+public class EditNameDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
 
     private EditText mEditText;
 
@@ -26,6 +29,10 @@ public class EditNameDialogFragment extends DialogFragment {
         args.putString("title", title);
         frag.setArguments(args);
         return frag;
+    }
+
+    public interface EditNameDialogListener {
+        void onFinishEditDialog(String inputText);
     }
 
     @Override
@@ -46,5 +53,22 @@ public class EditNameDialogFragment extends DialogFragment {
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        mEditText.setOnEditorActionListener(this);
+    }
+
+    // Fires whenever the textfield has an action performed
+    // In this case, when the "Done" button is pressed
+    // REQUIRES a 'soft keyboard' (virtual keyboard)
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (EditorInfo.IME_ACTION_DONE == actionId) {
+            // Return input text back to activity through the implemented listener
+            EditNameDialogListener listener = (EditNameDialogListener) getActivity();
+            listener.onFinishEditDialog(mEditText.getText().toString());
+            // Close the dialog and return back to the parent activity
+            dismiss();
+            return true;
+        }
+        return false;
     }
 }

@@ -19,7 +19,7 @@ import org.parceler.Parcels;
 
 import okhttp3.Headers;
 
-public class ComposeActivity extends AppCompatActivity {
+public class ComposeActivity extends AppCompatActivity implements EditNameDialogFragment.EditNameDialogListener {
 
     public static final String TAG = "ComposeActivity";
     public static final int MAX_TWEET_LENGTH = 280;
@@ -123,5 +123,11 @@ public class ComposeActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
         editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
+    // This method is invoked in the activity when the listener is triggered
+    // Access the data result passed to the activity here
+    public void onFinishEditDialog(String inputText) {
+        Toast.makeText(this, "Hi, " + inputText, Toast.LENGTH_SHORT).show();
     }
 }
