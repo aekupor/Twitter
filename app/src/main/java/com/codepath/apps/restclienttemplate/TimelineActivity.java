@@ -94,18 +94,24 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
         client.getNextPageOfTweets(tweets.get(tweets.size() - 1).idInt, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-
+                Log.i(TAG, "onSuccess for loadMore" + json.toString());
+                // Deserialize and construct new model objects from the API response
+                JSONArray jsonArray = json.jsonArray;
+                try {
+                    // Append the new data objects to the existing set of items inside the array of items
+                    List <Tweet> tweets = Tweet.fromJsonArray(jsonArray);
+                    // Notify the adapter of the new items made
+                    adapter.addAll(tweets);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-
+                Log.i(TAG, "onFailure for loadMore" + throwable);
             }
         });
-        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
-        //  --> Deserialize and construct new model objects from the API response
-        //  --> Append the new data objects to the existing set of items inside the array of items
-        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
     }
 
     @Override
