@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
@@ -29,6 +31,7 @@ public class FollowersActivity extends AppCompatActivity {
     List<User> users;
     UsersAdapter adapter;
     TwitterClient client;
+    MenuItem miActionProgressItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class FollowersActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("users");
                         adapter.addAll(User.fromJsonArray(jsonArray));
                         adapter.notifyDataSetChanged();
+                        hideProgressBar();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -83,6 +87,7 @@ public class FollowersActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("users");
                         adapter.addAll(User.fromJsonArray(jsonArray));
                         adapter.notifyDataSetChanged();
+                        hideProgressBar();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -94,5 +99,31 @@ public class FollowersActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //inflate the menu; this add items to the action bar if it is present
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Return to finish
+        showProgressBar();
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
     }
 }
