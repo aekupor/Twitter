@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -27,12 +28,18 @@ public class ProfileActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter adapter;
 
+    TextView tvTweets;
+    TextView tvLikes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
         client = TwitterApp.getRestClient(this);
+
+        tvTweets = findViewById(R.id.tvProfileTitle);
+        tvLikes = findViewById(R.id.tvProfileLikesTitle);
 
         //find the recycler view
         rvMyTweets = findViewById(R.id.rvMyTweets);
@@ -44,6 +51,9 @@ public class ProfileActivity extends AppCompatActivity {
         rvMyTweets.setLayoutManager(layoutManager);
         rvMyTweets.setAdapter(adapter);
 
+        getUserTweets();
+    }
+    public void getUserTweets() {
         client.getUserTweets(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
