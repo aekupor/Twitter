@@ -41,7 +41,10 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] List anything else that you can get done to improve the app functionality!
+   * Create User Profile page
+   * Make users in followers/following list clickable to take to User Profile page
+   * Make user profile pic and name from Tweet Details clickable to take to User Profile page
 
 ## Video Walkthrough
 
