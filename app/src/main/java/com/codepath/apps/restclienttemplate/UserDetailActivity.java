@@ -34,6 +34,8 @@ public class UserDetailActivity extends AppCompatActivity {
     TextView tvDescription;
     TextView tvTweetsNum;
     ImageView ivProfileImage;
+    TextView tvFollowingNum;
+    TextView tvFollowersNum;
 
     TwitterClient client;
     RecyclerView rvTweets;
@@ -51,6 +53,8 @@ public class UserDetailActivity extends AppCompatActivity {
         ivProfileImage = findViewById(R.id.ivProfileImage);
         tvDescription = findViewById(R.id.tvDescription);
         tvTweetsNum = findViewById(R.id.tvTweetsNum);
+        tvFollowersNum = findViewById(R.id.tvFollowersNum);
+        tvFollowingNum = findViewById(R.id.tvFollowingNum);
 
         User user = (User) Parcels.unwrap(getIntent().getParcelableExtra("USER"));
 
@@ -58,6 +62,8 @@ public class UserDetailActivity extends AppCompatActivity {
         tvScreenName.setText("@" + user.screenName);
         tvDescription.setText(user.description);
         tvTweetsNum.setText(Integer.toString(user.numTweets));
+        tvFollowingNum.setText(Integer.toString(user.follwingCount));
+        tvFollowersNum.setText(Integer.toString(user.followersCount));
 
         Glide.with(this)
                 .load(user.profileImageUrl)
