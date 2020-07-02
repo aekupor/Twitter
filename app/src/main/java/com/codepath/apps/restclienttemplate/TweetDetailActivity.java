@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -113,6 +114,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                         try {
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
                             Log.i(TAG, "liked tweet: " + tweet.id);
+                            btnLike.setBackgroundResource(R.drawable.ic_vector_heart);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -139,6 +141,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                         try {
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
                             Log.i(TAG, "disliked tweet: " + tweet.id);
+                            btnLike.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
