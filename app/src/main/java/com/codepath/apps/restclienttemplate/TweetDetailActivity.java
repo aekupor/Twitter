@@ -50,6 +50,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
     Button btnFollowing;
     Tweet tweet;
     TwitterClient client;
+    Boolean liked = false;
 
     String userToReply;
     Long replyTweetId;
@@ -104,56 +105,56 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TweetDetailActivity.this, "Like tweet", Toast.LENGTH_SHORT).show();
-                String tweetId = tweet.id;
-                Log.i(TAG, "tweet to like: " + tweetId);
-                //make an API call to Twitter to publish the tweet
-                client.likeTweet(tweetId, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        try {
-                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "liked tweet: " + tweet.id);
-                            btnLike.setBackgroundResource(R.drawable.ic_vector_heart);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if (!liked) {
+                    Toast.makeText(TweetDetailActivity.this, "Like tweet", Toast.LENGTH_SHORT).show();
+                    String tweetId = tweet.id;
+                    Log.i(TAG, "tweet to like: " + tweetId);
+                    //make an API call to Twitter to publish the tweet
+                    client.likeTweet(tweetId, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, "liked tweet: " + tweet.id);
+                                btnLike.setBackgroundResource(R.drawable.ic_vector_heart);
+                                liked = true;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to like tweet", throwable);
-                    }
-                });
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFailure to like tweet", throwable);
+                        }
+                    });
+                } else {
+                    Toast.makeText(TweetDetailActivity.this, "Unlike tweet", Toast.LENGTH_SHORT).show();
+                    String tweetId = tweet.id;
+                    Log.i(TAG, "tweet to dislike: " + tweetId);
+                    //make an API call to Twitter to publish the tweet
+                    client.dislikeTweet(tweetId, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, "disliked tweet: " + tweet.id);
+                                btnLike.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
+                                liked = false;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFailure to dislike tweet", throwable);
+                        }
+                    });
+                }
             }
         });
 
-        btnDislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(TweetDetailActivity.this, "Unlike tweet", Toast.LENGTH_SHORT).show();
-                String tweetId = tweet.id;
-                Log.i(TAG, "tweet to dislike: " + tweetId);
-                //make an API call to Twitter to publish the tweet
-                client.dislikeTweet(tweetId, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        try {
-                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "disliked tweet: " + tweet.id);
-                            btnLike.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to dislike tweet", throwable);
-                    }
-                });
-            }
-        });
 
         btnRetweet.setOnClickListener(new View.OnClickListener() {
             @Override
