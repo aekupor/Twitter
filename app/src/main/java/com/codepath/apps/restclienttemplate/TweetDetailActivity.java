@@ -63,7 +63,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         ivMedia = findViewById(R.id.ivMedia);
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
-        tvFollwersNum = findViewById(R.id.tvFollowingNum);
+        tvFollwersNum = findViewById(R.id.tvFollowersNum);
         tvFollowingNum = findViewById(R.id.tvFollowingNum);
         tvFollowersTitle = findViewById(R.id.tvFollowersTitle);
         tvFollowingTitle = findViewById(R.id.tvFollowingTitle);
