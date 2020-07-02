@@ -145,6 +145,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
         if (item.getItemId() == R.id.profile) {
             //profile icon has been selected
             Log.i(TAG, "profile clicked");
+            Intent i = new Intent (TimelineActivity.this, ProfileActivity.class);
+            startActivity(i);
             return true;
         }
         return super.onOptionsItemSelected(item);
