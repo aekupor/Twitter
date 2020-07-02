@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class UserDetailActivity extends AppCompatActivity {
     ImageView ivProfileImage;
     TextView tvFollowingNum;
     TextView tvFollowersNum;
+    TextView tvFollowersTitle;
+    TextView tvFollowingTitle;
 
     TwitterClient client;
     RecyclerView rvTweets;
@@ -56,8 +59,10 @@ public class UserDetailActivity extends AppCompatActivity {
         tvTweetsNum = findViewById(R.id.tvTweetsNum);
         tvFollowersNum = findViewById(R.id.tvFollowersNum);
         tvFollowingNum = findViewById(R.id.tvFollowingNum);
+        tvFollowersTitle = findViewById(R.id.tvFollowersTitle);
+        tvFollowingTitle = findViewById(R.id.tvFollowingTitle);
 
-        User user = (User) Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        final User user = (User) Parcels.unwrap(getIntent().getParcelableExtra("USER"));
 
         tvName.setText(user.name);
         tvScreenName.setText("@" + user.screenName);
@@ -83,6 +88,34 @@ public class UserDetailActivity extends AppCompatActivity {
         rvTweets.setAdapter(adapter);
 
         populateUserTimeline(user);
+
+        tvFollowersTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFollowersClick(user);
+            }
+        });
+
+        tvFollowersNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFollowersClick(user);
+            }
+        });
+
+        tvFollowingTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFollowingClick(user);
+            }
+        });
+
+        tvFollowingNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFollowingClick(user);
+            }
+        });
     }
 
     private void populateUserTimeline(User user) {
