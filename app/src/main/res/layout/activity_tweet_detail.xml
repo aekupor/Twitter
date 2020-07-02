@@ -25,7 +25,7 @@
         android:layout_below="@+id/tvScreenName"
         android:layout_marginStart="35dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/tvFollowersNum"
+        android:layout_toEndOf="@+id/tvFollowingNum"
         android:text="Following:"
         android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
         tools:text="4" />
 
     <TextView
-        android:id="@+id/tvFollowersNum"
+        android:id="@+id/tvFollowingNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvScreenName"

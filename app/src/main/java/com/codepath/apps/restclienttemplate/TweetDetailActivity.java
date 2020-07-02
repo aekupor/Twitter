@@ -2,10 +2,8 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +20,6 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.parceler.Parcels;
-
-import java.util.ArrayList;
 
 import okhttp3.Headers;
 
@@ -67,7 +63,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         ivMedia = findViewById(R.id.ivMedia);
         tvFavorites = findViewById(R.id.tvFavorites);
         tvRetweets = findViewById(R.id.tvRetweets);
-        tvFollwersNum = findViewById(R.id.tvFollowersNum);
+        tvFollwersNum = findViewById(R.id.tvFollowingNum);
         tvFollowingNum = findViewById(R.id.tvFollowingNum);
         tvFollowersTitle = findViewById(R.id.tvFollowersTitle);
         tvFollowingTitle = findViewById(R.id.tvFollowingTitle);
