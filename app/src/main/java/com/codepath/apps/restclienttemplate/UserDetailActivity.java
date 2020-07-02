@@ -78,6 +78,10 @@ public class UserDetailActivity extends AppCompatActivity {
                 .load(user.profileImageUrl)
                 .into(ivProfileImage);
 
+        Glide.with(this)
+                .load(user.profileBannerUrl)
+                .into(ivBannerImage);
+
         client = TwitterApp.getRestClient(this);
 
         //find the recycler view
