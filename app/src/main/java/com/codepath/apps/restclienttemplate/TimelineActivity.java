@@ -141,6 +141,12 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
             showEditDialog();
             return true;
         }
+
+        if (item.getItemId() == R.id.profile) {
+            //profile icon has been selected
+            Log.i(TAG, "profile clicked");
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
