@@ -43,13 +43,13 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
     ImageView ivMedia;
     Button btnLike;
     Button btnRetweet;
-    Button btnUnretweet;
     Button btnReply;
     Button btnFollowers;
     Button btnFollowing;
     Tweet tweet;
     TwitterClient client;
     Boolean liked = false;
+    Boolean retweeted = false;
 
     String userToReply;
     Long replyTweetId;
@@ -70,7 +70,6 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         tvFollowingNum = findViewById(R.id.tvFollowingNum);
         btnLike = findViewById(R.id.btnLike);
         btnRetweet = findViewById(R.id.btnRetweet);
-        btnUnretweet = findViewById(R.id.btnUnretweet);
         btnReply = findViewById(R.id.btnReply);
         btnFollowers = findViewById(R.id.btnFollowers);
         btnFollowing = findViewById(R.id.btnFollowing);
@@ -159,52 +158,55 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         btnRetweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TweetDetailActivity.this, "Retweet", Toast.LENGTH_SHORT).show();
-                String tweetId = tweet.id;
-                Log.i(TAG, "tweet to retweet: " + tweetId);
-                //make an API call to Twitter to publish the tweet
-                client.retweet(tweetId, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        try {
-                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "retweeted tweet: " + tweet.id);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if (!retweeted) {
+                    Toast.makeText(TweetDetailActivity.this, "Retweet", Toast.LENGTH_SHORT).show();
+                    String tweetId = tweet.id;
+                    Log.i(TAG, "tweet to retweet: " + tweetId);
+                    //make an API call to Twitter to publish the tweet
+                    client.retweet(tweetId, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, "retweeted tweet: " + tweet.id);
+                                btnRetweet.setBackgroundResource(R.drawable.ic_vector_retweet);
+                                retweeted = true;
+                                tvRetweets.setText(Integer.toString(tweet.retweets + 1));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to retweet tweet", throwable);
-                    }
-                });
-            }
-        });
-
-        btnUnretweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(TweetDetailActivity.this, "Unretweet", Toast.LENGTH_SHORT).show();
-                String tweetId = tweet.id;
-                Log.i(TAG, "tweet to unretweet: " + tweetId);
-                //make an API call to Twitter to publish the tweet
-                client.unretweet(tweetId, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        try {
-                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "unretweeted tweet: " + tweet.id);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFailure to retweet tweet", throwable);
                         }
-                    }
+                    });
+                } else {
+                    Toast.makeText(TweetDetailActivity.this, "Unretweet", Toast.LENGTH_SHORT).show();
+                    String tweetId = tweet.id;
+                    Log.i(TAG, "tweet to unretweet: " + tweetId);
+                    //make an API call to Twitter to publish the tweet
+                    client.unretweet(tweetId, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, "unretweeted tweet: " + tweet.id);
+                                btnRetweet.setBackgroundResource(R.drawable.ic_vector_retweet_stroke);
+                                retweeted = false;
+                                tvRetweets.setText(Integer.toString(tweet.retweets - 1));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure to unretweet tweet", throwable);
-                    }
-                });
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFailure to unretweet tweet", throwable);
+                        }
+                    });
+                }
             }
         });
 

@@ -160,16 +160,6 @@
         android:background="@drawable/ic_vector_retweet_stroke" />
 
     <Button
-        android:id="@+id/btnUnretweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnRetweet"
-        android:layout_alignStart="@+id/tvRetweetTitle"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:text="UnRetweet" />
-
-    <Button
         android:id="@+id/btnReply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
