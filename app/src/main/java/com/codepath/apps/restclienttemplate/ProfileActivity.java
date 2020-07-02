@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -51,10 +52,46 @@ public class ProfileActivity extends AppCompatActivity {
         rvMyTweets.setLayoutManager(layoutManager);
         rvMyTweets.setAdapter(adapter);
 
+        tvTweets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getUserTweets();
+            }
+        });
+
+        tvLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getUserLikes();
+            }
+        });
+
         getUserTweets();
     }
+
     public void getUserTweets() {
         client.getUserTweets(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i(TAG, "onSuccess" + json.toString());
+                JSONArray jsonArray = json.jsonArray;
+                try {
+                    adapter.clear();
+                    adapter.addAll(Tweet.fromJsonArray(jsonArray));
+                } catch (JSONException e) {
+                    Log.e(TAG, "json exception", e);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.i(TAG, "onFailure", throwable);
+            }
+        });
+    }
+
+    public void getUserLikes() {
+        client.getUserLikes(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.i(TAG, "onSuccess" + json.toString());
