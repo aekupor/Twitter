@@ -136,7 +136,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:background="@drawable/heartimage"
+        android:background="@drawable/ic_vector_heart_stroke"
         android:textSize="10sp" />
 
     <TextView
