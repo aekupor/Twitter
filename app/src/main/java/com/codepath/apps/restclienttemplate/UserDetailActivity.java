@@ -16,6 +16,8 @@ public class UserDetailActivity extends AppCompatActivity {
 
     TextView tvName;
     TextView tvScreenName;
+    TextView tvDescription;
+    TextView tvTweetsNum;
     ImageView ivProfileImage;
 
     @Override
@@ -26,11 +28,15 @@ public class UserDetailActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvName);
         tvScreenName = findViewById(R.id.tvScreenName);
         ivProfileImage = findViewById(R.id.ivProfileImage);
+        tvDescription = findViewById(R.id.tvDescription);
+        tvTweetsNum = findViewById(R.id.tvTweetsNum);
 
         User user = (User) Parcels.unwrap(getIntent().getParcelableExtra("USER"));
 
         tvName.setText(user.name);
         tvScreenName.setText("@" + user.screenName);
+        tvDescription.setText(user.description);
+        tvTweetsNum.setText(Integer.toString(user.numTweets));
 
         Glide.with(this)
                 .load(user.profileImageUrl)
