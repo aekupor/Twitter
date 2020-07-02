@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -130,5 +131,21 @@ public class UserDetailActivity extends AppCompatActivity {
     public void hideProgressBar() {
         // Hide progress item
         miActionProgressItem.setVisible(false);
+    }
+
+    public void onFollowersClick(User user) {
+        Log.i(TAG, "followers button clicked");
+        Intent i = new Intent(UserDetailActivity.this, FollowersActivity.class);
+        i.putExtra("USER_ID", user.idInt);
+        i.putExtra("FOLLOWERS", true);
+        startActivity(i);
+    }
+
+    public void onFollowingClick(User user) {
+        Log.i(TAG, "following button clicked");
+        Intent i = new Intent(UserDetailActivity.this, FollowersActivity.class);
+        i.putExtra("USER_ID", user.idInt);
+        i.putExtra("FOLLOWERS", false);
+        startActivity(i);
     }
 }
