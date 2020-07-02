@@ -45,6 +45,9 @@ The following **additional** features are implemented:
    * Create User Profile page
    * Make users in followers/following list clickable to take to User Profile page
    * Make user profile pic and name from Tweet Details clickable to take to User Profile page
+   * Display list of tweets user has tweeted on User Profile page
+   * Make each tweet on User Profile page clickable to take to Tweet Detail page
+   * Make following/followers title clickable to list all following users/followed users
 
 ## Video Walkthrough
 
