@@ -140,16 +140,6 @@
         android:background="@drawable/ic_vector_heart_stroke"
         android:textSize="10sp" />
 
-    <TextView
-        android:id="@+id/tvLikeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvFavoriteTitle"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/btnLike"
-        android:text="Like" />
-
     <Button
         android:id="@+id/btnRetweet"
         android:layout_width="30dp"
