@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONException;
@@ -312,6 +313,13 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
         i.putExtra("USER_ID", tweet.user.idInt);
         i.putExtra("FOLLOWERS", false);
+        startActivity(i);
+    }
+
+    public void onUserClick(User user) {
+        Log.i(TAG, "user clicked");
+        Intent i = new Intent(TweetDetailActivity.this, TweetDetailActivity.class);
+        i.putExtra("USER", Parcels.wrap(user));
         startActivity(i);
     }
 }
