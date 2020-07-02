@@ -248,6 +248,20 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                 onFollowingClick(tweet);
             }
         });
+
+        tvScreenName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onUserClick(tweet.user);
+            }
+        });
+
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onUserClick(tweet.user);
+            }
+        });
     }
 
     private void showEditDialog() {
@@ -318,7 +332,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
 
     public void onUserClick(User user) {
         Log.i(TAG, "user clicked");
-        Intent i = new Intent(TweetDetailActivity.this, TweetDetailActivity.class);
+        Intent i = new Intent(TweetDetailActivity.this, UserDetailActivity.class);
         i.putExtra("USER", Parcels.wrap(user));
         startActivity(i);
     }
