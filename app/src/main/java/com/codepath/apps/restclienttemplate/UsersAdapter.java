@@ -97,7 +97,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         }
 
         public void bind(User user) {
-            tvScreenName.setText(user.screenName);
+            tvScreenName.setText("@" + user.screenName);
             Glide.with(context)
                     .load(user.profileImageUrl)
                     .into(ivProfileImage);
