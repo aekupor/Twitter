@@ -37,6 +37,7 @@ public class UserDetailActivity extends AppCompatActivity {
     TextView tvDescription;
     TextView tvTweetsNum;
     ImageView ivProfileImage;
+    ImageView ivBannerImage;
     TextView tvFollowingNum;
     TextView tvFollowersNum;
     TextView tvFollowersTitle;
@@ -56,6 +57,7 @@ public class UserDetailActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvName);
         tvScreenName = findViewById(R.id.tvScreenName);
         ivProfileImage = findViewById(R.id.ivProfileImage);
+        ivBannerImage = findViewById(R.id.ivBanner);
         tvDescription = findViewById(R.id.tvDescription);
         tvTweetsNum = findViewById(R.id.tvTweetsNum);
         tvFollowersNum = findViewById(R.id.tvFollowersNum);

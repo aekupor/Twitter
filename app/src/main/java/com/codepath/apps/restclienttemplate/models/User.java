@@ -16,6 +16,7 @@ public class User {
     public String name;
     public String screenName;
     public String profileImageUrl;
+    public String profileBannerUrl;
     public long idInt;
     public Integer followersCount;
     public Integer follwingCount;
@@ -30,6 +31,7 @@ public class User {
         user.name = jsonObject.getString("name");
         user.screenName = jsonObject.getString("screen_name");
         user.profileImageUrl = jsonObject.getString("profile_image_url_https");
+        user.profileBannerUrl = jsonObject.getString("profile_banner_url");
         user.idInt = jsonObject.getLong("id");
         user.followersCount = jsonObject.getInt("followers_count");
         user.follwingCount = jsonObject.getInt("friends_count");
