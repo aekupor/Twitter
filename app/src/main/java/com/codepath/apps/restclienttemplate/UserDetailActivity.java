@@ -26,6 +26,7 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.Headers;
 
 public class UserDetailActivity extends AppCompatActivity {
@@ -74,8 +75,11 @@ public class UserDetailActivity extends AppCompatActivity {
         tvFollowingNum.setText(Integer.toString(user.follwingCount));
         tvFollowersNum.setText(Integer.toString(user.followersCount));
 
+        int radius = 30;
+        int margin = 10;
         Glide.with(this)
                 .load(user.profileImageUrl)
+                .transform(new RoundedCornersTransformation(radius, margin))
                 .into(ivProfileImage);
 
         Glide.with(this)

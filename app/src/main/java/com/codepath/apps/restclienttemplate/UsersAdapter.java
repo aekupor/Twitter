@@ -109,8 +109,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             tvScreenName.setText("@" + user.screenName);
             tvName.setText(user.name);
 
-            int radius = 30; // corner radius, higher value = more rounded
-            int margin = 10; // crop margin, set to 0 for corners with no crop
+            int radius = 30;
+            int margin = 10;
             Glide.with(context)
                     .load(user.profileImageUrl)
                     .transform(new RoundedCornersTransformation(radius, margin))

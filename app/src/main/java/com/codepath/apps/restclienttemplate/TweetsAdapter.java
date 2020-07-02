@@ -24,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
 
     public static final String TAG = "TweetsAdapter";
@@ -125,8 +127,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
             tvScreenName.setText(tweet.user.screenName);
             tvDate.setText(tweet.getRelativeTimeAgo(tweet.createdAt));
+
+            int radius = 30;
+            int margin = 10;
             Glide.with(context)
                     .load(tweet.user.profileImageUrl)
+                    .transform(new RoundedCornersTransformation(radius, margin))
                     .into(ivProfileImage);
             if (tweet.imageUrl != null) {
                 ivMedia.setVisibility(View.VISIBLE);

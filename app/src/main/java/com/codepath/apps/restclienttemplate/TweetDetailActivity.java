@@ -21,6 +21,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import org.json.JSONException;
 import org.parceler.Parcels;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.Headers;
 
 public class TweetDetailActivity extends AppCompatActivity implements ComposeFragment.EditNameDialogListener {
@@ -84,8 +85,12 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         tvFollowingNum.setText(Integer.toString(tweet.user.follwingCount));
         tvFavorites.setText(Integer.toString(tweet.favorites));
         tvRetweets.setText(Integer.toString(tweet.retweets));
+
+        int radius = 30;
+        int margin = 10;
         Glide.with(this)
                 .load(tweet.user.profileImageUrl)
+                .transform(new RoundedCornersTransformation(radius, margin))
                 .into(ivProfileImage);
         if (tweet.imageUrl != null) {
             Log.i(TAG, "image: " + tweet.imageUrl);
