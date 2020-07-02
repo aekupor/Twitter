@@ -94,7 +94,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                 User user = users.get(position);
                 Log.i(TAG, "user clicked: " + user.screenName);
 
-                // create intent for the new activity - if want to be clickable
+                // create intent for the new activity
+                Intent intent = new Intent(context, UserDetailActivity.class);
+                // serialize the user using parceler
+                intent.putExtra("USER", Parcels.wrap(user));
+                // show the activity
+                context.startActivity(intent);
             }
         }
 
