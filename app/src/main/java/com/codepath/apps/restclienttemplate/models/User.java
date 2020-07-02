@@ -31,7 +31,9 @@ public class User {
         user.name = jsonObject.getString("name");
         user.screenName = jsonObject.getString("screen_name");
         user.profileImageUrl = jsonObject.getString("profile_image_url_https");
-        user.profileBannerUrl = jsonObject.getString("profile_banner_url");
+        if (jsonObject.has("profile_banner_url")) {
+            user.profileBannerUrl = jsonObject.getString("profile_banner_url");
+        }
         user.idInt = jsonObject.getLong("id");
         user.followersCount = jsonObject.getInt("followers_count");
         user.follwingCount = jsonObject.getInt("friends_count");

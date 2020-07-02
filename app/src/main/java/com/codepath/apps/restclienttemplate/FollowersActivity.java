@@ -61,10 +61,20 @@ public class FollowersActivity extends AppCompatActivity {
                 public void onSuccess(int statusCode, Headers headers, JSON json) {
                     Log.i(TAG, "onSuccess call to getFollowersList");
                     JSONObject jsonObject = json.jsonObject;
+                    Log.i(TAG, "YOOOO111");
+
                     try {
+                        Log.i(TAG, "YOOOO11");
+
                         JSONArray jsonArray = jsonObject.getJSONArray("users");
+                        Log.i(TAG, "YOOOO1");
+
                         adapter.addAll(User.fromJsonArray(jsonArray));
+                        Log.i(TAG, "YOOOO2");
+
                         adapter.notifyDataSetChanged();
+                        Log.i(TAG, "YOOOO3");
+
                         hideProgressBar();
                     } catch (JSONException e) {
                         e.printStackTrace();
