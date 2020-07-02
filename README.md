@@ -56,8 +56,11 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 [Main Page and Followers](https://imgur.com/a/eeoDUna)
+
 [Compose Tweet and Profile Page](https://imgur.com/a/QTHkThO)
+
 [Like, Reply, and View Links](https://imgur.com/a/7jj1Eye)
+
 [User Details Page](https://imgur.com/a/do1s84C)
 
 ## Notes
