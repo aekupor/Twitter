@@ -73,10 +73,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvScreenName;
+        ImageView ivProfileImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             itemView.setOnClickListener(this);
         }
 
@@ -96,6 +98,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         public void bind(User user) {
             tvScreenName.setText(user.screenName);
+            Glide.with(context)
+                    .load(user.profileImageUrl)
+                    .into(ivProfileImage);
         }
     }
 }
