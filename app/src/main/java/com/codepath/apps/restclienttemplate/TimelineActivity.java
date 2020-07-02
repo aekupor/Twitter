@@ -2,6 +2,8 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +40,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
     EndlessRecyclerViewScrollListener scrollListener;
+    MenuItem miActionProgressItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +118,15 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Return to finish
+        showProgressBar();
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu; this add items to the action bar if it is present
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -158,6 +170,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
                     adapter.addAll(Tweet.fromJsonArray(jsonArray));
                     //call setRefreshing(false) to signal refresh has finished
                     swipeContainer.setRefreshing(false);
+                    hideProgressBar();
                 } catch (JSONException e) {
                     Log.e(TAG, "json exception", e);
                 }
@@ -217,5 +230,15 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
                 Log.e(TAG, "onFailure to publish tweet", throwable);
             }
         });
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
     }
 }
