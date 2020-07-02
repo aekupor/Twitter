@@ -64,4 +64,13 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/tvTweetsTitle"
         tools:text="17" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTweets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvTweetsTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp" />
 </RelativeLayout>
