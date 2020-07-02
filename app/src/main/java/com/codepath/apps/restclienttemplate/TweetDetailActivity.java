@@ -239,11 +239,21 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         btnFollowing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i(TAG, "following button clicked");
-                Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
-                i.putExtra("USER_ID", tweet.user.idInt);
-                i.putExtra("FOLLOWERS", false);
-                startActivity(i);
+                onFollowingClick(tweet);
+            }
+        });
+
+        tvFollowingTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFollowingClick(tweet);
+            }
+        });
+
+        tvFollowingNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFollowingClick(tweet);
             }
         });
     }
@@ -303,6 +313,14 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
         i.putExtra("USER_ID", tweet.user.idInt);
         i.putExtra("FOLLOWERS", true);
+        startActivity(i);
+    }
+
+    public void onFollowingClick(Tweet tweet) {
+        Log.i(TAG, "following button clicked");
+        Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
+        i.putExtra("USER_ID", tweet.user.idInt);
+        i.putExtra("FOLLOWERS", false);
         startActivity(i);
     }
 }
