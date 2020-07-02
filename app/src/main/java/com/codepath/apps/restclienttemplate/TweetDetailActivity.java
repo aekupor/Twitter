@@ -46,7 +46,6 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
     Button btnLike;
     Button btnRetweet;
     Button btnReply;
-    Button btnFollowing;
     Tweet tweet;
     TwitterClient client;
     Boolean liked = false;
@@ -74,7 +73,6 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         btnLike = findViewById(R.id.btnLike);
         btnRetweet = findViewById(R.id.btnRetweet);
         btnReply = findViewById(R.id.btnReply);
-        btnFollowing = findViewById(R.id.btnFollowing);
 
         client = TwitterApp.getRestClient(this);
 
@@ -233,13 +231,6 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
             @Override
             public void onClick(View view) {
                 onFollowersClick(tweet);
-            }
-        });
-
-        btnFollowing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onFollowingClick(tweet);
             }
         });
 
