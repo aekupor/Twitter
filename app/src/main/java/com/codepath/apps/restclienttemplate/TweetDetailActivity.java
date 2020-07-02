@@ -39,6 +39,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
     TextView tvRetweets;
     TextView tvFollwersNum;
     TextView tvFollowingNum;
+    TextView tvFollowersTitle;
+    TextView tvFollowingTitle;
     ImageView ivProfileImage;
     ImageView ivMedia;
     Button btnLike;
@@ -68,6 +70,8 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         tvRetweets = findViewById(R.id.tvRetweets);
         tvFollwersNum = findViewById(R.id.tvFollowersNum);
         tvFollowingNum = findViewById(R.id.tvFollowingNum);
+        tvFollowersTitle = findViewById(R.id.tvFollowersTitle);
+        tvFollowingTitle = findViewById(R.id.tvFollowingTitle);
         btnLike = findViewById(R.id.btnLike);
         btnRetweet = findViewById(R.id.btnRetweet);
         btnReply = findViewById(R.id.btnReply);
@@ -223,11 +227,13 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         btnFollowers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i(TAG, "followers button clicked");
+                /*Log.i(TAG, "followers button clicked");
                 Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
                 i.putExtra("USER_ID", tweet.user.idInt);
                 i.putExtra("FOLLOWERS", true);
                 startActivity(i);
+                 */
+                onFollowersClick(tweet);
             }
         });
 
@@ -291,5 +297,13 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                 Log.e(TAG, "onFailure to publish tweet", throwable);
             }
         });
+    }
+
+    public void onFollowersClick(Tweet tweet) {
+        Log.i(TAG, "followers button clicked");
+        Intent i = new Intent(TweetDetailActivity.this, FollowersActivity.class);
+        i.putExtra("USER_ID", tweet.user.idInt);
+        i.putExtra("FOLLOWERS", true);
+        startActivity(i);
     }
 }
