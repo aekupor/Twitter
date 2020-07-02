@@ -17,6 +17,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
@@ -106,8 +108,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         public void bind(User user) {
             tvScreenName.setText("@" + user.screenName);
             tvName.setText(user.name);
+
+            int radius = 30; // corner radius, higher value = more rounded
+            int margin = 10; // crop margin, set to 0 for corners with no crop
             Glide.with(context)
                     .load(user.profileImageUrl)
+                    .transform(new RoundedCornersTransformation(radius, margin))
                     .into(ivProfileImage);
         }
     }
