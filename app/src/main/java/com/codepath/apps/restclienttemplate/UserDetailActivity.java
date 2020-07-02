@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -141,6 +142,25 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.compose) {
+            //compose icon has been selected
+            //navigate to the compose activity
+            showEditDialog();
+            return true;
+        }
+
+        if (item.getItemId() == R.id.profile) {
+            //profile icon has been selected
+            Log.i(TAG, "profile clicked");
+            Intent i = new Intent (UserDetailActivity.this, ProfileActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu; this add items to the action bar if it is present
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -180,5 +200,17 @@ public class UserDetailActivity extends AppCompatActivity {
         i.putExtra("USER_ID", user.idInt);
         i.putExtra("FOLLOWERS", false);
         startActivity(i);
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        ComposeFragment composeFragment = ComposeFragment.newInstance("");
+        composeFragment.show(fm, "fragment_edit_name");
+    }
+
+    private void showEditDialog(String content) {
+        FragmentManager fm = getSupportFragmentManager();
+        ComposeFragment composeFragment = ComposeFragment.newInstance(content);
+        composeFragment.show(fm, "fragment_edit_name");
     }
 }
