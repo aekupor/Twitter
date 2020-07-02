@@ -42,7 +42,6 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
     ImageView ivProfileImage;
     ImageView ivMedia;
     Button btnLike;
-    Button btnDislike;
     Button btnRetweet;
     Button btnUnretweet;
     Button btnReply;
@@ -70,7 +69,6 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
         tvFollwersNum = findViewById(R.id.tvFollowersNum);
         tvFollowingNum = findViewById(R.id.tvFollowingNum);
         btnLike = findViewById(R.id.btnLike);
-        btnDislike = findViewById(R.id.btnDislike);
         btnRetweet = findViewById(R.id.btnRetweet);
         btnUnretweet = findViewById(R.id.btnUnretweet);
         btnReply = findViewById(R.id.btnReply);
@@ -118,6 +116,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                                 Log.i(TAG, "liked tweet: " + tweet.id);
                                 btnLike.setBackgroundResource(R.drawable.ic_vector_heart);
                                 liked = true;
+                                tvFavorites.setText(Integer.toString(tweet.favorites + 1));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -141,6 +140,7 @@ public class TweetDetailActivity extends AppCompatActivity implements ComposeFra
                                 Log.i(TAG, "disliked tweet: " + tweet.id);
                                 btnLike.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
                                 liked = false;
+                                tvFavorites.setText(Integer.toString(tweet.favorites - 1));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
