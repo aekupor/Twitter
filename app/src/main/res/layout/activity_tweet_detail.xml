@@ -15,7 +15,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="Followers:" />
+        android:text="Followers:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvFollowingTitle"
@@ -171,16 +172,6 @@
         android:layout_marginEnd="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <Button
-        android:id="@+id/btnFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnRetweet"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="Followers" />
 
     <Button
         android:id="@+id/btnFollowing"
