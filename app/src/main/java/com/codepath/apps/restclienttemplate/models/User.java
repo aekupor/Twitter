@@ -19,6 +19,8 @@ public class User {
     public long idInt;
     public Integer followersCount;
     public Integer follwingCount;
+    public String description;
+    public Integer numTweets;
 
     //empty constructor needed for Parceler Library
     public User(){}
@@ -31,6 +33,8 @@ public class User {
         user.idInt = jsonObject.getLong("id");
         user.followersCount = jsonObject.getInt("followers_count");
         user.follwingCount = jsonObject.getInt("friends_count");
+        user.description = jsonObject.getString("description");
+        user.numTweets = jsonObject.getInt("statuses_count");
         return user;
     }
 
