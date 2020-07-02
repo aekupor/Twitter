@@ -48,6 +48,7 @@ The following **additional** features are implemented:
    * Display list of tweets user has tweeted on User Profile page
    * Make each tweet on User Profile page clickable to take to Tweet Detail page
    * Make following/followers title clickable to list all following users/followed users
+   * Create profile page for signed in user to see their own tweets
 
 ## Video Walkthrough
 
