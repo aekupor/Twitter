@@ -2,7 +2,7 @@
 
 **Twitter** is an android app that allows a user to view their Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **X** hours spent in total
+Time spent: **15** hours spent in total
 
 ## User Stories
 
@@ -42,7 +42,7 @@ The following **stretch** features are implemented:
 The following **additional** features are implemented:
 
 * [x] List anything else that you can get done to improve the app functionality!
-   * Create User Profile page
+   * Create User Profile page with list of tweets, banner, and more
    * Make users in followers/following list clickable to take to User Profile page
    * Make user profile pic and name from Tweet Details clickable to take to User Profile page
    * Display list of tweets user has tweeted on User Profile page
@@ -55,9 +55,17 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
+[Main Page and Followers](https://imgur.com/a/eeoDUna)
+[Compose Tweet and Profile Page](https://imgur.com/a/QTHkThO)
+[Like, Reply, and View Links](https://imgur.com/a/7jj1Eye)
+[User Details Page](https://imgur.com/a/do1s84C)
+
 ## Notes
 
-Describe any challenges encountered while building the app.
+Describe any challenges encountered while building the app:
+* Modal overlay of compose message was quite challenging to implement
+* It wasn't too difficult to make a link clickable, but then it made the rest of tweet body not clickable to see more details - this bug was quite challenging and took a while to come up with the fix
+* UI design is difficult to make it look polished
 
 ## Open-source libraries used
 
