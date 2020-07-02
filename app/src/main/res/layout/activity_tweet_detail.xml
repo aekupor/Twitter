@@ -151,13 +151,13 @@
 
     <Button
         android:id="@+id/btnRetweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/tvRetweetTitle"
         android:layout_alignStart="@+id/tvRetweetTitle"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:text="Retweet" />
+        android:background="@drawable/ic_vector_retweet_stroke" />
 
     <Button
         android:id="@+id/btnUnretweet"
